@@ -3,7 +3,7 @@ MAINTAINER James Verbunk <verbunk@gmail.com>
 
 RUN apk add --no-cache mosquitto
 
-RUN adduser --system --disabled-password --disabled-login mosquitto
+RUN adduser -SDH mosquitto
 
 COPY config /mqtt/config
 VOLUME ["/mqtt/config", "/mqtt/data", "/mqtt/log"]
