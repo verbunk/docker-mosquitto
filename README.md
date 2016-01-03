@@ -1,17 +1,17 @@
 docker-mosquitto
 ================
 
-Docker image for mosquitto
+Docker image for mosquitto. I'm tailoring this to work on a QNAP NAS under container station but it should be generic enough. It uses alpine linux to be as small as possible.
 
 ## Setup for Data Persistence
 
 Create three directories on your host:
 
-* /src/mqtt/config
-* /src/mqtt/data
-* /src/mqtt/log
+* /share/docker/mqtt/config
+* /share/docker/mqtt/data
+* /share/docker/mqtt/log
 
-Copy the files from the config directory of this project into /src/mqtt/config. Change them as needed for your particular needs.
+Copy the files from the config directory of this project into /share/docker/mqtt/config. Change the base paths for your particular needs.
 
 ## Run
 
@@ -22,10 +22,10 @@ Exposes Port 1883 (MQTT) 9001 (Websocket MQTT)
 Alternatively you can use volumes to make the changes
 persistent and change the configuration.
 
-    mkdir -p /srv/mqtt/config/
-    mkdir -p /srv/mqtt/data/
-    mkdir -p /srv/mqtt/log/
-    # place your mosquitto.conf in /srv/mqtt/config/
+    mkdir -p /share/docker/mqtt/config/
+    mkdir -p /share/docker/mqtt/data/
+    mkdir -p /share/docker/mqtt/log/
+    # place your mosquitto.conf in /share/docker/mqtt/config/
     # NOTE: You have to change the permissions of the directories
     # to allow the user to read/write to data and log and read from
     # config directory
@@ -36,7 +36,7 @@ persistent and change the configuration.
     -v /srv/mqtt/config:/mqtt/config:ro \
     -v /srv/mqtt/log:/mqtt/log \
     -v /srv/mqtt/data/:/mqtt/data/ \
-    --name mqtt toke/mosquitto
+    --name mqtt verbunk/docker-mosquitto
 
 Volumes: /mqtt/config, /mqtt/data and /mqtt/log
 
